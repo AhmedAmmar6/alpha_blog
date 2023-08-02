@@ -1,14 +1,25 @@
-<% if flash[:notice].present? %>
-  <div>
-    <%= flash[:notice] %>
-  </div>
-<% end %>
+<h1 class = "text-center"><%= @article.title %></h1>
 
-<h1>Showing articles details</h1>
-<p><strong>Title: </strong><%=@article.title %></p>
-<p><strong>Description: </strong><%=@article.description %></p>
-<p>
-<%= link_to 'Edit', edit_article_path(@article)%> |
-<%= link_to 'Delete', article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %> |
-<%= link_to 'Return to Articles', articles_path%>
-</p>
+<div class="container">
+    <div class = "row justify-content-md-center">
+        <div class="col-8 mt-5">
+            <div class="card text-center">
+            <div class="card-header font-italic">
+                by Ahmed Ammar
+            </div>
+            <div class="card-body">
+                <div class="card-text text-right"><%= simple_format(@article.description) %></div>
+                <%= link_to "Edit", edit_article_path(@article), class:"btn btn btn-outline-info"%>
+                <%= link_to "Delete", article_path(@article), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"btn btn btn-outline-danger"%>
+            </div>
+            <div class="card-footer text-muted">
+                <small>Created <%= time_ago_in_words(@article.created_at) %> ago, edited <%= time_ago_in_words(@article.updated_at) %> ago</small>
+
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -23,7 +23,7 @@ class ArticlesController < ApplicationController
             flash[:notice] = "Article was added successfully"
             redirect_to article_path(@article)
         else
-            flash[:error] = @article.errors.full_messages.join(' /n')
+            flash[:error] = @article.errors.full_messages.join(",\n")
             redirect_to new_article_path
         end
     end
