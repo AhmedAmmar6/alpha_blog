@@ -1,7 +1,7 @@
 <div class="Container">
     <div class="row justify-content-center">
         <div class="col-6 mt-4">
-          <%= render 'errors'%>
+          <%= render 'errors'%> 
             <%= form_for @user, html: { class: "shadow p-3 mb-3 bg-success rounded text-center" } do |f| %>
                     <div class="form-group row">
                     <%= f.label :username, class: "col-sm-2 col-form-label text-light"%>
@@ -23,7 +23,19 @@
                         <%= f.password_field :password, class:"form-control shadow round", placeholder:"Enter password"%>
                         </div>
                     </div>
-                    <p></p>     
+                    <p></p>
+                    <div class="form-group row">
+                    <%= f.label :avatar, class: "col-sm-2 col-form-label text-light" %>
+                        <div class="col-8">
+                        <%= f.file_field :avatar, class:"form-control shadow round", placeholder:"Chose file to attach"%>
+                        </div>
+                    </div>
+                    <p></p>
+                    <% if @user.avatar.attached? %>
+                        <div style="display: flex; justify-content: center; align-items: center; margin: 30px">
+                            <%= image_tag @user.avatar, style: "width: 200px; display: block;" %>
+                        </div>
+                    <% end %>      
                 <div class="text-center mt-4">
                 <%= f.submit(@user.new_record? ? "Sign Up" : "Update", class:"btn btn-outline-light btn-lg") %>
                 </div>
