@@ -1,3 +1,5 @@
+
+
 <h1 class="text-center">Alpha Bloggers</h1>
 
 <div class="container">
@@ -16,7 +18,14 @@
                 <% end %> 
                 <p class="card-text"><%= pluralize(user.articles.count, "article") %></p>
                 <%= link_to "View Profile", user, class:"btn btn btn-outline-success"%>
-                <%= link_to "Edit Profile", edit_user_path(user), class:"btn btn btn-outline-info"%>
+                <% if logged_in? %>
+                    <% if user == current_user %>
+                        <%= link_to "Edit Profile", edit_user_path(user), class:"btn btn btn-outline-info"%>
+                    <% end %>
+                    <% if current_user.admin? %>
+                        <%= link_to "Delete user", user_path(user),data: { turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "btn btn btn-outline-danger" %>
+                    <% end %>    
+                <% end %>
             </div>
             <div class="card-footer text-muted">
                 <small>Joined <%= time_ago_in_words(user.created_at) %> ago</small>
